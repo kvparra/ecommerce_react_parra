@@ -1,0 +1,7 @@
+Hay tres opciones para entrar a GITHUB
+
+PRIMERA: CLI (TERMINAL/ LÍNEA DE COMANDO) https://git-scm.com/downloads
+
+SEGUNDA: GUI -GIT HUB DESKTOP (INTERFAZ GRÁFICA) https://desktop.github.com/
+
+TERCERA: APP WEB: GITHUB.COM
