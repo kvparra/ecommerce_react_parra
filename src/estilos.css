@@ -60,12 +60,24 @@ span{
 
 footer {
     display: flex;
-    justify-content: center; 
-	background-color: #9F7183;
-	height: 10%;
+    justify-content: center;
+    background-color: #7B8ADE;
+    height: 10%;
     color: white;
-    padding: 15px;
+    padding: 0.5rem;
     border-radius: 10px;
     width: 98%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+    font-size: 0.8rem;
+    width: 98%;
+}
+
+
+#root{
+    display: flex;
+    flex-direction: column;
+}
+main{
+    flex-grow: 1;
+    padding: 1rem;
+}

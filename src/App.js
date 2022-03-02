@@ -17,12 +17,14 @@ import ReactDOM from 'react-dom'
 import NavBar from "./components/NavBar"
 import Body from "./Body"
 import Footer from "./Footer"
+import Main from './Main'
 
 const App = () => {
     return (
         <>
             <NavBar/> 
             <Body/>
+            <Main/>
             <Footer/>
         </>
     )
