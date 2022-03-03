@@ -5,3 +5,116 @@ PRIMERA: CLI (TERMINAL/ LÍNEA DE COMANDO) https://git-scm.com/downloads
 SEGUNDA: GUI -GIT HUB DESKTOP (INTERFAZ GRÁFICA) https://desktop.github.com/
 
 TERCERA: APP WEB: GITHUB.COM
+
+COMPONENTES:
+1) Siempre son funciones
+2) Siempre retornan algo
+3) Siempre arrancan en Mayúscula
+4) Siempre retornan una sola cosa
+5) Siempre pueden recibir props
+6) Los props son de solo lectura
+
+COMPONENTES PRESENTACIONALES: Son componentes que sirven más que nada para mostrar algo en pantalla,
+por lo general, no buscan la info en el exterior, sino que la reciben como props (a lo sumo tienen una lógica chica como un if/else/bucle/etc)
+COMPONENTES CONTAINER: Son los que necesitan de una API externa para funcionar, o la generan/leen de algún lugar. Tienen más lógica, generan los props que te van a pasar.
+Con JS para traer info del exterior puedo usar un fetch x ej.
+
+
+VANILLA JS
+    function foo(nombre){
+        console.log(nombre)
+    }
+
+    foo("Horacio") (acá puedo pasar mil parámetros, la cant es infinita)
+
+    foo("Carlos")
+
+    En JS VANILLA, si yo paso 2 parámetros, tengo que definir 2 argumento en la function:
+
+    function foo(nombre, edad){
+        console.log(nombre)
+    }
+
+    foo("Carlos",35)
+
+REACT JS
+
+    function Foo(nombre){
+        console.log(nombre)
+    }
+
+    <Foo nombre="Horacio" edad="32"/>
+
+    Entonces por ejemplo, en el main.js:
+    const Main =(test) => {
+        console.log(test.nombre) (y me va a mostar en consola Horacio!!)
+        return (blabla);
+    }
+
+
+    <Foo atributo/>
+    El atributo que yo le pase va a ser el nombre del parámetro
+    En cambio, en react, si yo paso 2 parámetros NUNCA voy a recibir 2.
+    En react voy a recibir 1 solo parámetro que adentro tiene todo.
+
+    Entonces: const Main = (test) => {
+        console.log(test)
+        return (
+            <main>
+                <h2> WELCOME! </h2>
+            </main>
+        )
+        }
+
+        export default Main;
+
+        A los parámetros como test en React, se los conoce como "props"
+
+DESTRUCTURING
+    DE ARRAYS
+    Tenés un array y en las próx líneas vas a usar el array.
+    const arr = [1,2,3]
+    Si yo quisiera acceder a esos, usaría arr[0], etc.
+    
+    Pero es largo escribirlo a cada rato, para eso llega el destructuring en 2015:
+    Tenés que crear una constante llamada uno, dos y tres, que valgan lo que haya en arr en esa posición.
+        const arr = [1,2,3]
+
+        const uno = arr[0]
+        const dos = arr[1]
+        const tres = arr[2]
+
+        const [uno,dos] = arr
+
+        DE OBJETOS
+        const obj = {x:1,y:2,z:3}
+
+        const x = obj.x
+        const y = obj.y
+        const z = obj.z
+
+        const {x:x,y:y,z:z} = obj
+        Le estoy diciendo: creame una constante llamada x que valga lo que haya en obj en la propiedad x.
+
+
+        const App = () => {
+
+/*   const persona= {
+    nombre: "Juan",
+    edad: "30"
+  } */
+    return (
+        <>
+            <Header/> 
+            <ItemListContainer nombre="Karina" empresa="Juanítica"/>
+            <Body/>
+            <Main nombre="Horacio" edad={32}/>
+           {/*  <Main persona={persona}/> */}
+            <Footer/>
+        </>
+    )
+  }
+
+export default App
+
+

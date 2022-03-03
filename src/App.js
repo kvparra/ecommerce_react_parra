@@ -1,28 +1,24 @@
-/* const App = () => "Hola Mundo con App importado"
-
-export default App */
-
 
 import React from 'react'
 
 import ReactDOM from 'react-dom'
 
-/* const App = () => {
-  return (
-    <div>App</div>
-  )
-} */
 
 
-import NavBar from "./components/NavBar"
+import Header from "./Header"
 import Body from "./Body"
-import Footer from "./Footer"
 import Main from './Main'
+import Footer from "./Footer"
+import ItemListContainer from './components/ItemListContainer'
+
 
 const App = () => {
+
+
     return (
         <>
-            <NavBar/> 
+            <Header/> 
+            <ItemListContainer nombre="Karina" empresa="JUANÍTICA"/>
             <Body/>
             <Main/>
             <Footer/>
@@ -33,3 +29,10 @@ const App = () => {
 export default App
 
 
+
+ /*  const datosPersona= {
+    nombre: "Juan",
+    empresa: "Juanítica"
+  } */
+
+              {/* <Main persona={persona}/> */}
