@@ -8,6 +8,8 @@ import React from 'react'
 
 import ReactDOM from 'react-dom'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // 3) Necesitamos un componente en scope
 
 /* function App () {
@@ -20,7 +22,7 @@ import ReactDOM from 'react-dom'
 
 import App from './App'
 
-import "./estilos.css"
+import "./estilos.scss"
 /* const App = () => "Hola Mundo Flecha sin retorno" */
 
 

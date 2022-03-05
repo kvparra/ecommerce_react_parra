@@ -7,6 +7,7 @@ const Footer = () => {
 
        <div id="footer__copy">
        <p>&copy; Copyright 2022 - KVP - Todos los derechos reservados </p>
+       
        </div>
         
         <div>
