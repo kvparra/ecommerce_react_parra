@@ -9,5 +9,3 @@ const Body = () => {
 }
 
 export default Body
-
-{/* <h1> BIENVENIDOS AL MUNDO JUANI<span>TICA</span></h1> */}

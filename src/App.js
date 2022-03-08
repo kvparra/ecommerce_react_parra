@@ -34,12 +34,3 @@ const App = () => {
   }
 
 export default App
-
-
-
- /*  const datosPersona= {
-    nombre: "Juan",
-    empresa: "Juanítica"
-  } */
-
-              {/* <Main persona={persona}/> */}
