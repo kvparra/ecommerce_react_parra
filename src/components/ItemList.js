@@ -1,11 +1,23 @@
 import React from 'react'
+import Item from './Item'
+import {Container, Button, Card, Row, Col} from 'react-bootstrap'
 
 
-const ItemList = () => {
-
+const ItemList = ({items}) => {
 
   return (
-    <div>ItemList</div>
+    <Container>
+      {items.map(item=>{
+        return(
+            <Item
+              key={item.id}
+              item={item}
+            />
+        )
+      }
+      )}
+
+    </Container>  
   )
 }
 
