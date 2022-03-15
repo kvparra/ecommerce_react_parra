@@ -7,3 +7,5 @@ const productoUno ={
     "pictureUrl": "https://dummyimage.com/255x255.png/0f6b43",
     "stock": 23
   }
+
+  export default productoUno;

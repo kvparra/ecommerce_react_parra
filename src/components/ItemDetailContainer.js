@@ -11,9 +11,7 @@ function getProductoUno(){
   })
 }
 const ItemDetailContainer = () => {
-
   const [productoOne, setProducto] =useState({});
-
   useEffect(()=>{
     getProductoUno()
   .then(respuestaPromise=>setProducto(respuestaPromise))
@@ -24,8 +22,6 @@ const ItemDetailContainer = () => {
     <Container>ItemDetailContainer
       <ItemDetail productoOne={productoOne}/>
     </Container>
-
   )
 }
-
 export default ItemDetailContainer
