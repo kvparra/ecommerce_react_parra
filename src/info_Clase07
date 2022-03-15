@@ -1,0 +1,126 @@
+API WEB: Conjunto de reglas que tiene el navegador que yo puedo usar con Javascript.
+    Permiten acceder a un montón de cosas, por ejemplo, el DOM. Pero también, window, eventos (con addEventListener), la API WEB del storage (que se separa en 2 - session y local-)
+    Revisar el listado de todas las APIs WEB q existen... AJAX es una de esas
+    El nombre de la API realmente es XMLHttpRequest (XHR): Pedido de archivos de tipo XML a través del protocolo HTTP. Esto quiere decir que JS podía usar el protocolo HTTP para ir al servidor y pedir un archivo XML o HTML o texto plano, sin la necesidad de que tu página se quede cargada. Entonces lo bueno es que vos podías bajar un archivo gigante sin que se cuelgue la página.Por ejemplo, subo un archivo a GoogleDrive, y mientras carga puedo seguir haciendo otra cosa (o lo mismo la descarga). Resumiendo:
+        XHR: API WEB para pedir o enviar info a un servidor.
+AJAX: No lo vamos a aplicar en el proyecto, sino que lo vamos a aplicar conceptualmente.
+    Async Javascript And XML
+    FETCH: No lo vamos a usar. Es una API WEB para pedir/enviar info al servidor. Igual que XHR, solo que es la nueva y XHR la vieja.
+En todos los casos SON ASINCRÓNICOS, es decir, que durante todo el tiempo que dure lo que yo envío o recibo, JS no se cuelga. Es como que se va al background hace todo y dice: cdo esté yo te aviso.
+
+API REST: Representation State Transfer (se me transfiere por un servidor, la representación de un estado). Por lo general, trabajan en formato JSON. Por ejemplo, una demo de API REST es jsonplaceholder.typicode.com --> es una de las típicas. En la pág te indica los recursos que tenés para usar (por ej: /users o /comments, etc).
+    Hay unas reglas generales que siguen todas las API REST, pero hay que leer la documentación de cada una antes de aplicarla.
+25´: Explicación funcionamiento de API web.
+    Es como un traductor entre 2 máquinas (una el cliente y la otra el servidor).
+
+
+Cachear: guardar la info en alguna parte del navegador. Cuando pido algo al servidor, el servidor cuando responde, puede configurar la respuesta de forma tal que te responde con el array que le pediste, pero también te voy a mandar más info (metadata), para que mi navegador cuando lo reciba también lo cachee (o sea, lo guarde en el cache del navegador). Pero esto es de HTTP.
+    HTTP: Protocolo de Transferencia de Hipertexto.
+
+Después JS tiene su propia API de caches (46'). Dentro de "Inspeccionar" (la página)>Applications >Cache storage (es una API web). Si la tocás no muestra nada, pero con una API WEB se puede hacer en la consola: const particion = caches.open() (yo se que hay una api web que se llama caches que tiene un método que se llama open - es como decir, se que hay una api web que se llama DOM y tiene un método que se llama getElementById). Entonces yo puedo crear una particion_uno, donde luego guardar info:
+    const particion = caches.open(particion_uno): una vez creada, yo le puedo decir "a esta particion, empezá a guardarle este archivo". Cosa que la próxima vez que el usuario navegue en la pág y necesite ese archivo, no lo tenga que volver a guardar porque ya lo guardé en el cache. La pág sería mucho más rápida. El límite del cache son 10 mb.
+    Si le hago console.log a la particion: console.log(particion): Para notificarme que todo salió bien o mal, me da un objeto de tipo promesa. Entonces ahora que se que es una promesa, en vez del console.log, convendría hacer "particion.then()" o .catch()
+
+Axios: es una librería moderna que implemente AJAX
+
+Si yo quisiera mostrar los twits de pepito en mi página, busco "API TWITTER" y hay varias que puedo consumir en mi página para mostrarlo, solo que son pagas.Tenés que crear cuenta de desarrollador.
+Con BACK END puedo crear mis propias APIs.
+    En VSCODE el profe creó una app rest-api-server. Dice: create a REST API Server using a JSON file and your VSC.
+    (podes levantar cualquier JSON como si fuera una API REST)
+
+CLIENTE
+    Para iniciar una comunicación debe tener una direccion de la máquina con la cual va a interactuar (URL/IP), un método/verbo (es como la intención que tiene el cliente con el servidor --> ej: si quiero pedir, el método es GET; si quiero enviarlo y que vos lo guardes es un POST; si quiero que el servidor borre algo, el método es DELETE, etc).
+    Además poder especificar la versión de HTTP que estás usando, que usualmente se autocompleta. Y también como cliente podés configurar HEADER (son como las configuraciones del pedido, como las etiquetas META de HTML) y BODY.
+    El header se puede configurar como parámetro dentro del FETCH (sería dentro del segundo parámetro o b) ejemplo:
+        fetch("http://jsonplaceholder.typicode.com/users", {
+            headers:
+                "content-type:"video/mp4"
+        })
+    Body (o payload): es el lugar por donde viaja la información cruda.
+
+SERVIDOR
+    El protocolo del servidor determina que siempre tiene que responder con  CÓDIGO - MENSAJE - VERSIÓN (como que se sincroniza con la versión del cliente) - HEADER - BODY/PAYLOAD
+        El header sirve para configurar cosas, pero también para VALIDAD que esté recibiendo lo que pedí.
+        El ejemplo más tipico de CÓDIGO Y MENSAJE es: ERROR 404 (código) - NOT FOUND (mensaje)
+
+        Los mensajes de HTTP se dividen en 5 grupos (puedo verlos en la página de "http.cat"): 
+        - Los 100: mensajes informativos (ej: 100= continue; 101:switching protocols, etc)
+        - Los 200: mensajes de éxito
+        - Los 300: mensajes de redirecciones
+        - Los 400: errores de cliente (como solicitador de info, tu fetch estuvo mal hecho y en algo te equivocaste, el pedido está mal -NO el servidor-)
+        - Los 500: mensajes de error de servidor (ej: 503= service unavailable)
+
+
+
+fetch(a,b)
+    Simplemente por ejecutarla, le está pidiendo algo al servidor
+    Parámetro a: lugar a donde querés hacer el pedido. Es un string (url o IP) --> El url es como el nombre de la url, es como un alias o un atajo, porque nadie se acordaría el nro de la IP de cada página. Ejemplo:
+    fetch("http://jsonplaceholder.typicode.com/users")
+        Su sistema de notificación es una promesa. Lo corroboro con consola >>> const pedido =fetch("http://jsonplaceholder.typicode.com/users")
+        console.log (pedido) >>> me devuelve una promesa y uso .then y .catch (y te trae si está bien o mal y también el resultado)
+
+        .then((resultado)=>{
+            console.log("Todo bien")
+            console.log(resultado) //Yo pensé que me devolvería el array de usuarios, pero NO: me devolvió un objeto de tipo response, que es como la info técnica de ese pedido. De ahí lo que me va a importar es el código(status), header y body.(****)
+        })
+        .catch((error)=>{
+            console.log("Todo mal")
+        })
+
+        (****)Dentro de Response, hay una línea que dice Prototype: tiene métodos para descargar la info en algún formato, para que elija el que más me convenga. No son muchos, hay para elegir 
+            .json() >> Si pedi un array o un objeto de JS
+            .text() >> Si pedí un HTML / XML / .txt
+            .blob() >> Si pedi cualquier archivo binario, como imagen, audio, mp4, mp3, etc
+            .arrayBuffer() no se usa
+
+            En mi caso como pedí un array de usuarios voy a usar .json() --> DENTRO DEL FETCH!
+                const respuesta_formateada = resultado.json()
+                console.log(respuesta_formateada) --> Este console.log ME VA A DAR OTRA PROMESA 1h42, porque la promesa te intenta prometer que va a pasar. Vos no sabés cuánto tiempo va a tardar en traerte los usuarios, entonces te promete que lo va a hacer y te promete que te va a avisar. Por eso dice estado pending.
+
+
+
+
+    Parámetro b: es opcional, podría ser un objeto. Por ahora, solo vamos a usar el a.
+
+1h33 EJERCICIO --> Entrar a cualquier página, por ejemplo, mlibre, ir a la consola a pestaña NETWORK o RED: ahí, cada línea que se ve es un pedido nuevo que se hizo por HTTP a algún servidor. Incluso puedo filtrar por pedidos que se hicieron solo por fetch o solo por xhr, o también filtrar por pedidos de imagenes, o css, o Media, o lo que sea.
+
+fetch("http://jsonplaceholder.typicode.com/users")
+        .then((resultado)=>{
+            console.log("Todo bien")
+            console.log(resultado) 
+            const respuesta_formateada = resultado.json()
+            console.log(respuesta_formateada)
+        })
+        .catch((error)=>{
+            console.log("Todo mal")
+        })
+
+Y ahora para que me muestre como resultado los ARRAYS DE USUARIOS:
+
+fetch("http://jsonplaceholder.typicode.com/users")
+        .then((resultado)=>{
+            console.log("Todo bien")
+            console.log(resultado) 
+            const respuesta_formateada = resultado.json()
+            return   respuesta_formateada     
+        })
+        .then((resultado)=>{
+            console.log(resultado)
+        })
+        .catch((error)=>{
+            console.log("Todo mal")
+        })
+
+    Ahora sí, con respuesta_formateada y el return me muestra el array, que era info que yo no tenía y que fui a buscar. Lo importante es que con el return dentro del primer then, puedo poner el otro then por fuera.
+
+DESAFIO
+Se tiene que repetir el patrón de diseño CONTAINER.
+    El patrón container está formado por lo menos x 2 componentes (el container - consigue la info y tiene la lógica fuerte- y el presentacional -que muestra todo lo que recibe el container-). En este caso:
+        -CONTAINER: ItemDetailContainer.js -->En vez de conseguir un array de data o de muchos objetos como el ItemListContainer, recibe 1 sola data, 1 solo objeto. Aunque su lógica es estructuralmente igual:
+            * Sigue el useEffect con la promesa, el setTimeOut y los segundos. También el then y el catch.
+            * Los estados se mantienen (const loading...usestate true) 1h56
+            * El pasaje de prop se mantiene
+            * Única diferencia: en vez de resolver la promesa con array de productos, se resolvería con 1 solo objeto. El resto de la implementación es idéntica.
+            * Como no hay un array de data, se le pasa 1 solo prop al presentacional y este te muestra ese único objeto que recibe.
+            * El estado con el que vamos a arrancar ya no es array vacío [] xx Es OBJETO VACÍO.
+        - PRESENTACIONAL: ItemDetail.js

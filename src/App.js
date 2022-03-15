@@ -10,6 +10,7 @@ import Body from "./Body"
 import Main from './Main'
 import Footer from "./Footer"
 import ItemListContainer from './components/ItemListContainer'
+import ItemDetailContainer from './components/ItemDetailContainer'
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
         <>
             <Header/> 
             <ItemListContainer nombre="Karina" empresa="JUANÍTICA"/>
+            <ItemDetailContainer/>
             <Body/>
             <Main a={valor_de_a}>
                 <h2>Hello world</h2>
