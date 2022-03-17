@@ -6,7 +6,7 @@ import {Container, Button, Card, Row, Col} from 'react-bootstrap'
 const ItemList = ({items}) => {
 
   return (
-    <Container>
+    <section className="productos">
       {items.map(item=>{
         return(
             <Item
@@ -17,7 +17,7 @@ const ItemList = ({items}) => {
       }
       )}
 
-    </Container>  
+    </section>  
   )
 }
 

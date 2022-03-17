@@ -1,0 +1,83 @@
+Para hacer el TOAST de XXX, descargamos REACT TOASTIFY
+(es una librería, como si estuviese instalando JQuery)
+1. https://www.npmjs.com/package/react-toastify
+2. En consola: npm i react-toastify
+3. Dentro de la página voy a "The gist" y copio el import del Toast Container lo más arriba posible, por ejemplo en App.js:
+
+    Entonces dentro de App.js:
+    import {ToastContainer} from "react-toastify"
+    import 'react-toastify/dist/ReactToastify.css'; (esto vendria a ser el estilo, sino me lo va a mostrar en b&n)
+
+    const App =()=>{
+        return(
+            <>
+            <Header />
+            ....
+            <ToastContainer/>
+            </>
+        )
+    }
+    4. Como ahora está arriba, puedo usarlo en los demás archivos. Por ej, lo usamos en el ItemListContainer.js, dentro del useEffect
+    5. Documentación para configurarlo como quiera:https://fkhadra.github.io/react-toastify/introduction/
+    6. También usamos un toast.dismiss por si el resultado de la promesa tarda menos de lo que tarda la notificación en irse. Y un toast.error en el catch.
+
+
+
+Yo no quiero que me vuelva a cargar la página completa cada vez que aprieto un navlink, quiero que solo cargue el cambio.
+(39´) PARA ESO  INSTALÓ la librería npm i react-router-dom por consola
+    Con ello, a partir de ahora vamos a poder hacer links a la barra de navegación y que el usuario vea a veces todo el catálogo, o el catálogo filtrado, o el detalle de un producto, o el carrito, etc.
+    Usamos la versión 6 que es la última
+    reactrouter.com>> API REFERENCE >> setup
+    * Una vez que lo instalás es similar a Bootstrap, implementas componentes (son los que aparecen a la derecha como <BrowserRouter>)
+    * Además de los "componentes" te brinda hooks! Todos los que empiezan con use... (ej: useNavigate)
+        Las reglas ya las conozco: los tengo que ejecutar, colocar dentro del componente, no usarlos dentro de los condicionales
+
+    * Los puedo usar en cualquier componente, pero siempre que esté dentro de cualquier 
+        BrowserRouter: Router que se usa en el navegador con la API History (es una api de js como el DOM o fetch o cualquiera)
+        HashRouter:Router que se usa en el navegador con la API Location (es la que hace la url con #)
+        MemoryRouter: Router que guarda la navegación en memoria (react va a guardar los clicks y la navegación dentro de su propia memoria)
+        StaticRouter: Router que se usa en el servidor (SSR) --> esto es para backend. Es ServerSet?Rendering
+        NativeRouter: Route que se usa en mobile
+        * Vamos a usar esta librería en varios lugares. 
+            Por lo menos lo vamos a usar en el cartWidget 1 vez
+            1 vez en el ItemListContainer
+            1 vez en el ItemDetailContainer
+            1 vez en el carrito (aunque aún no lo desarrollamos)
+            Teniendo en cuenta esto, nos conviene poner le BrowserRoute en App. Justo ahora nos da que toda la aplicación tiene que estar dentro del browser router, pero no siempre tiene que ser así. Es una cuestión estratégica de ver qué es lo que conviene.
+        * (55')Lo coloqué en App y ahí dentro lo que ya estaba antes. Esto no debería modificar nada. Ahora ya está, puedo usar la librería en cualquier lugar que sea hijo de App
+        * Primero usó el componente <Link> o <NavLink>. Ahora los lugares donde usé el ancla <a> del NavBar Tengo que reemplazarlos por Link y los href por to. (58'). TAmbién agregué Link en el H1 del header y en carrito de la NavBar.
+        * La diferencia entre las etiquetas Link y NavLink, es que en los Link se puede usar la clase .active en el css y darle formato para cuando clickeo, por ej: .active{color:red}
+        * Efectos de hovers para links: página tympanus.net/codrops Los de Mary Lou son buenísimos porque explica muy bien y deja demos con código abierto.
+        * También está la página: freefrontend.com, el profe no la usó pero vs la recomendaron. O codyhouse.co/library
+
+    Ahora empieza la edición. Yo quiero mantener footer y header iguales, pero cambiar el Main.
+        * Por el momento comento lo que tenga dentro y solo dejo el container fluid.
+        * Nosotros queremos que por cada click que hagamos en un link, algo en el main se vuelva a reejecutar y si coincide justo con la url donde estamos parados, entonces que la librería me muestre un componente distinto.
+        * Esto lo vamos a lograr con el componente Route (si lo clickeo en la pág de reactrouter)>Type Declaration, voy a ver que tiene vs propiedades. Las que vamos a usar x ahora son
+            * path: tiene que ser un string y tiene que coincidir con la url que vos querés machear
+            * element: el componente que quiero mostrar si justo caigo en esa url.
+        * Ahora necesito poner tantas rutas como componentes tengamos <Route path="" element={<Componente/>}/>
+        * El profe hizo el caso de nav con 5 links: inicio - carrito - cat1 - cat2 - cat 3. Pero las categorías se pueden hacer con url dinámico para no hacer infinitos links. Eso se escribe: /cat/:id (o por ej: /cat/electronica).
+        * Luego necesito lo mismo, para cuando clickeo cada producto de la grilla, para que me muestre el detalle del producto (lo mismo: tampco puedo hacer /prod1 / prod2 etc, hago todos en 1 y luego). Para que no toda la tarjeta sea Link, puedo usar el botón del artículo. (1h16)
+        <Link to={`/producto/${item.id}`}>VER DETALLE<Link/}>
+        * Vamos a configurar 4 rutas como mínimo: "/" (para la landing page, que es donde el usuario entra la página y ve todo el catálogo completo de productos -ItemListContainer-), "/carrito","/categoria/:id" (quiero mostrar un catálogo de productos, pero no todos, sino dependiendo la categoría),"/producto/:id" (para ItemDetailContainer)
+            Entonces escribo todos esos routes en el Main. Lo que hace el truco son los : del path. 
+            Para el caso del carrito no hago :id porque tengo 1 solo carrito, no muchos!
+            Podría hacer múltiples secciones dinámicas, por ejemplo después de categoría >id > color (lo inventé)
+            Entonces creamos x ej Carrito.js >rafce (no le desarrollo nada porque aún no es necesario) y lo importo en el Main
+            (1h28) Entonces para el caso de las CATEGORÍAS: me conviene filtrarlo en el map, porque lo único que cambia de la implementación es que no debe tomar el array completo, sino una parte del array.
+            * Todos los Route tienen que estar dentro de una etiqueta <Routes></Routes>: el hijo directo de Routes tiene que ser Route sí o sí. Es como un SWITCH (el de los case) pero en formato componente:
+                switch (url){
+                    case:"/":
+                        return
+                        ...
+                }
+                Entonces te dice si vos estás parado en determinado url y en el caso que coincida con el path, te muestra el componente que le haya puesto al element.
+                (1h36)
+    (1h39) hook useParams en el ItemListContainer
+
+    (1h43) Fijarse que tiene diferente el orden de la ItemListContainer --> entonces no me toma el clg(idCategoria), porque el useEffect está fuera de la función.
+
+            
+
+
