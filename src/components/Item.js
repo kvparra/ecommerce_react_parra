@@ -14,7 +14,7 @@ const Item = ({item}) => {
       <h3> $ {item.price} </h3>
       <text> {item.description} </text>
       <hr/>
-      <Link to={`/producto/${item.id}`}>
+      <Link to={`/item/${item.id}`}>
         <Button variant="dark" mb-50>Agregar al carrito</Button>
       </Link>
     </article>

@@ -7,10 +7,10 @@ const NavBar = () => {
     return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-light " >
 
-            <Link to="/categoria/vestidos" className='nav__link'> cat 1</Link>
-            <Link to="/categoria/pantalones" className='nav__link'> cat 2</Link>
-            <Link to="/categoria/camperas" className='nav__link'> cat 3</Link>
-            <Link to="carrito">
+            <Link to="/category/Katz" className='nav__link'> cat 1</Link>
+            <Link to="/category/Meemm" className='nav__link'> cat 2</Link>
+            <Link to="/category/Gabtune" className='nav__link'> cat 3</Link>
+            <Link to="cart">
                 <CartWidget/> 
             </Link>
     </nav>

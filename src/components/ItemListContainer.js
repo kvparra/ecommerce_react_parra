@@ -6,31 +6,35 @@ import {toast } from 'react-toastify';
 import {useParams} from "react-router-dom"
 
 
-function getProducts(){
-  return new Promise ((res, rej)=>{
-    setTimeout(()=>{
-      
-      res(products)
-      /* rej(products) */
-  },2000)
-  })
-}
+
+
 
 const ItemListContainer = () => {
 
   const[loading, setLoading]= useState(true) 
   const [items, setItems] =useState([]);
-  console.log("render nuevo")
-  const {idCategoria}= useParams()
-  console.log(idCategoria)
-  /* const resultado = useParams
-  console.log(resultado) */
   
-  
+  const {idCategoria}= useParams() 
 
   useEffect(()=>{
-    toast.info("🦄Se están cargando los productos")
-    getProducts()
+    toast.info("Se están cargando los productos")
+    
+    const getProducts = new Promise ((res, rej)=>{
+      setTimeout(()=>{
+        console.log(idCategoria)
+        if (idCategoria == undefined){
+          return res(products)
+        }else if (idCategoria!=null){
+          const filtered = products.filter(function(element){
+            return element.category==idCategoria;
+          })
+          return res(filtered)
+        }        
+        /* rej(products) */
+    },2000)
+    })
+    
+    getProducts
   .then((respuestaPromise)=>{
     toast.dismiss()
     setItems(respuestaPromise)
@@ -52,5 +56,3 @@ const ItemListContainer = () => {
 }
 
 export default ItemListContainer
-
-//L 17/03:

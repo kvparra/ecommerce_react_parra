@@ -4,7 +4,7 @@ const productoUno ={
     "description": "Erigeron rhizomatus Cronquist",
     "price": 3331.01,
     "category": "Katz",
-    "pictureUrl": "https://dummyimage.com/255x255.png/0f6b43",
+    "pictureUrl": "https://dummyimage.com/150x150.png/0f6b43",
     "stock": 23
   }
 
