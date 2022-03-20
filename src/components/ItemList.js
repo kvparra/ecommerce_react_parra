@@ -1,6 +1,5 @@
 import React from 'react'
 import Item from './Item'
-import {Container, Button, Card, Row, Col} from 'react-bootstrap'
 
 
 const ItemList = ({items}) => {

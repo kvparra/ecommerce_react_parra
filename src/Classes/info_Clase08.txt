@@ -80,4 +80,78 @@ Yo no quiero que me vuelva a cargar la página completa cada vez que aprieto un 
 
             
 
+CLASE COMPLEMENTARIA
+
+Vamos a hacer que en el botón de detalle vaya a cada producto que le corresponda.
+* Primero vamos a dejar de usar el archivo del array de productos y vamos a cambiarlo por la web de fakestoreapì (no es una api real, sino una de prueba)
+    (después también se creó una cuenta en app.fakejson.com)
+* Para usar el fakestoreapì, borro de la función getProducts (en su caso se llamaba pedido) la promesa vieja y puso el fetch que dice la página (fetch('https://fakestoreapi.com/products'))
+* fetch siempre da un objeto de tipo Promise
+    1. fetch => Promise {}
+    * El then de un fetch, nunca te da el resultado de lo que vos pedís
+    2. fetch.then() => Response {}
+        El primer then de ese fetch no me va a dar el array de la api, me va a dar un objeto de tipo Response{}
+        De un objeto Response, siempre tengo que hacer ese objeto.json
+    3. Response{}=> Response.json()
+
+        Y ese Response.json() también siempre te da una promise:
+    4. Response.json() => Promise{}
+
+Otras reglas:
+    Si tenés una promesa suelta (está en una varible, no está dentro de ningún then): continuas con un .then()
+    Si tenés una promesa adentro de un then(): retornas esa promesa y continuas con un then abajo
+
+    Puede hacerse dentro de una función: 
+        const getProducts = fetch('https://fakestoreapi.com/products') // Esto sería una promesa suelta7
+
+        getProducts
+        .then(() =>{
+
+        })
+        .catch(() =>{
+
+        })
+        .finally(() =>{
+
+        })
+
+O directamente el fetch solo:
+    fetch('https://fakestoreapi.com/products') // Esto sería una promesa suelta
+    .then((response) =>{ //Este primer then me da un objeto de tipo response
+      /* console.log(response.json()) */ //Según los pasos, a este objeto le hago el .json (y esto me da un promise en el clg). Y como está dentro del then, lo retorno y pongo un then abajo.
+      return response.json()
+    })
+    .then((resultado)=>{
+      /* console.table(resultado) */ //Acá me muestra todos los productos del array
+      setItems(resultado)
+    })
+    .catch(() =>{
+      toast.error("Error al cargar los productos")
+    })
+    .finally(() =>{
+      setLoading(false)
+    })
+
+Hacemos el ItemDetailContainer nuevamente de cero, que ahí es donde está el tema
+    * Podría otra vez pedir todos los productos como en el itemlistc, y aplicar un filter; pero, a pesar de que va a funcionar, el problema es que 
+        - estamos pidiendo cosas que ya pedí antes
+        - estoy trayendo cosas que no necesito
+        - son más líneas de código
+        - más lenta va a hacer la operación
+    * La opción correcta es la de la pág que dice "GET A SINGLE PRODUCT"
+
+(53') Probamos usar las valoraciones y estrellitas provistas por el fakestoreapi.
+    Me guío de la página: https://www.npmjs.com/package/rc-rate
+    Primero instalo npm i rc-rate (por consola)
+    Agrego el componente y el css que me dice en Usage:
+        import Rate from 'rc-rate';
+        import 'rc-rate/assets/index.css';
+
+    Luego lo agregué como <Rate/> en el ItemDetails y ya te muestra las estrellitas para colorear.
+    Y ahora que ya sé que funciona puse el count y el value dentro del Rate.
+    Fijarse en la tabla sus propiedades. Por ej, con onChange puedo tomar los clics para dsp mandar al back y que muestre el promedio, por ej.
+    (1h18') explico como guardar el rate
+(1h15' aprox) Explicó como hacer para tomar cada producto si lo tengo guardado en un array mio (como lo había hecho hasta la entrega anterior)
+
+
 
