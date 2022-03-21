@@ -1,0 +1,23 @@
+*Para filtrar por categorías el fakestoreapi, ir a la parte de "Get all categories"
+
+Esta clase vamos  desarrollar Contador que es hijo de ItemDetail
+(cómo pasar props de un componente hijo a un componente padre)
+
+Entonces creó una carpeta "eventos" paralela a public y src:
+ *Dentro creó el index.html y app.js 
+
+ (1h20' aprox) Explicación del preventDefault: que lo que hace es seguir tomando los console.logs pero no toma el efecto que produce la etiqueta (ejemplo, si es un link, no te lleva donde dice el link; o con un onKeyDown, no te deja escribir si le haces preventDefault- en el input no te muestra nada escrito-, pero en consola lo detecta.)
+
+* target: elemento original que te dispara el evento
+
+* stopPropagation: tiene que ver con el concepto de propagación de eventos
+    Los eventos en JS se propagan a través del DOM
+
+Para nuestro caso:
+    PADRE: ItemDetail (tiene que tener una función y se la tiene que pasar al hijo)
+        Según el desafío, la función que tenemos que pasar es onAdd
+        Además hay que pasarle el stock e initial
+    HIJO: Contador
+        Del hijo nos interesa pasar al padre el estado del contador, que es la cantidad que el cliente quiere comprar
+        (es lo único que necesito del hijo)
+        Entonces dentro del const onAdd del ItemDetail, pongo cantidadSeleccionada
