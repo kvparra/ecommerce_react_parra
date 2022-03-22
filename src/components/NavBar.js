@@ -1,6 +1,7 @@
 import React from 'react'
 import CartWidget from "./CartWidget"
-import {Link} from "react-router-dom";
+import {Link} from "react-router-dom"
+import Form from "./Form"
 
 const NavBar = () => {
     return (
@@ -11,6 +12,9 @@ const NavBar = () => {
             <Link to="/category/Gabtune" className='nav__link'> cat 3</Link>
             <Link to="cart">
                 <CartWidget/> 
+            </Link>
+            <Link to="/form">
+                Form 
             </Link>
     </nav>
     

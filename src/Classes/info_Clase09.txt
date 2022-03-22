@@ -44,3 +44,63 @@ AFTERCLASS - TUTOR ERIC
     Y luego: 
         De este modo, estoy guardando en un estdo local de este componente, el nro que me llega desde el contador.
     (30')
+
+    Es buena práctica usar el Link para navegar, con el to=/cart o lo que setCantidadSeleccionada
+
+    Hacerlo con useNavigate: https://reactrouter.com/docs/en/v6/getting-started/overview (ir hasta abajo donde está explicado useNavigate)
+    Lo que hace es que a través de un evento, lleva al usuario a otra url.
+    Esto se usa cuando nosotros queremos enviar al usuario a otro lado, sin que el usuario navegue x su cuenta sino que nosotros lo llevemos.
+        Por ejemplo: submit / cuando se efectua la compra / en un login
+        import { useNavigate } from "react-router-dom";
+
+            const ItemDetail = ({item}) => {
+
+            const [cantidadSeleccionada, setCantidadSeleccionada] =useState(0)
+            let navigate = useNavigate();
+
+            const onAdd = (cantidadSeleccionada) =>{
+                /* console.log('Añadir al carrito', cantidadSeleccionada) */
+                setCantidadSeleccionada(cantidadSeleccionada)
+                navigate('/cart')
+            }
+            return ( BLA BLA BLA ...
+    Incluso al navigate puedo demorarlo con un setTimeOut.
+
+            const onAdd = (cantidadSeleccionada) =>{
+            /* console.log('Añadir al carrito', cantidadSeleccionada) */
+            setCantidadSeleccionada(cantidadSeleccionada) //Acá guarda la cantidad en el estado
+
+            setTimeout(()=>{
+            navigate('/cart')
+            },3000)
+            
+        }
+        return (
+
+DESPUÉS EXPLICÓ MÁS DE EVENTOS
+    ¿Qué pasaría si yo quisiera capturar los datos del mouse, en el window con un addEventListener (x e y del mouse), para en base  eso hacer alguna animación o lo que sea.
+    Él creó un Form.js (40') y uso el handleMouse para detectar las coordenadas en X e Y del usuario en la pág.
+    Lo probamos con el clg. Pero para que funcione hay que guardarlo en un estado, para luego tomar un evento a partir de ese estado.
+    Para eso creó: 
+            const Form = () => {
+            const [coord, setCoord] = useState({X:'', Y:''})
+            useEffect(()=>{
+                const handleMouse =(e)=>{
+                    console.log(e.clientX)
+                    console.log(e.clientY)
+                    setCoord({
+                        X: e.clientX,
+                        Y: e.clientY,
+                    })
+                }
+                window.addEventListener('mousemove', handleMouse)
+
+                return()=>{
+                    window.removeEventListener('mousemove', handleMouse) //Tengo que desuscribirme al evento, sino se tilda la computdora porque le estoy mandando millones de addEventListeners y me consume mucha memoria
+                }
+            })
+        return (
+
+PARA CAPTURAR DATOS DEL FORM CON ONCHANGE (SIRVE PARA CUANDO TENGA QUE CPTURAR EVENTOS DEL USUARIO EN EL CARRITO)
+    Puedo acceder a los values con e.target.value (50' prox)
+
