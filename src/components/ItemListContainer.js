@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import ItemList from './ItemList'
 import {toast } from 'react-toastify';
 import {useParams} from "react-router-dom"
-
 const ItemListContainer = () => {
 
   const[loading, setLoading]= useState(true) 
@@ -27,14 +26,30 @@ const ItemListContainer = () => {
     .finally(() =>{
       setLoading(false)
     })
+
+    /* return()=>{
+      setItems([])
+    } */
+
   },[idCategoria])
-     
+
+ /*  return(
+  <div style={{marginTop: '20px'}}>
+    {loading ? <Spinner/> : <ItemList items={items}/> }
+  </div>
+) */
+
   if(loading){
-    return <h1>Cargando...</h1>
-  } else{
-    return <ItemList items={items}/>
-    
-  }
+  return <h1>Cargando...</h1>
+} else{
+  return <ItemList items={items}/>
+  
+}
+     
+  
 }
 
 export default ItemListContainer
+
+
+

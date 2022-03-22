@@ -21,3 +21,26 @@ Para nuestro caso:
         Del hijo nos interesa pasar al padre el estado del contador, que es la cantidad que el cliente quiere comprar
         (es lo único que necesito del hijo)
         Entonces dentro del const onAdd del ItemDetail, pongo cantidadSeleccionada
+
+    Desafío: cdo itemCount emita un evento "click" en su botón, debés ejecutr el callback onAdd y le pasarás como parámetro el número conseguido en el contador.
+    Una vez que consigas el número, lo guardás en un estado En la clase09 hicimos hasta la parte de recibir el nro.
+    Entonces faltaría: agarrar ese valor y guardarlo en un estado. Se guarda en el estado la cantidadSeleccionadaque vino del hijo.
+    Luego con ese estado ya puedo saber si es undefined o es un nro.
+        Si es undefined no hago nada
+        Si llega  ser un nro, el contador debe desaparecer. (ver si se puede usr el display:none)
+
+AFTERCLASS - TUTOR ERIC
+
+* TEMA 1: useParams
+    Sirve para que cuando nosotros declaramos la ruta en el App.js, dentro del Route, cuando ponemos los ":" quiere decir que lo que pongamos luego va a ser dinámico.
+    Ej: /category/:id 
+    Y el nombre que le demos a eso (en este caso idCategoria), es lo que vamos a capturar con el hook useParams
+    Después en el itemListContainer lo capturo con const (idCategoria)=useParams()
+    
+    Lo que pedía el desafío era tener dentro de ITemDetail, una función (onAdd), pero cuyo onClick esté en el contador.
+    Pide guardar "cantidadSeleccionada" en un estado local (entonces yo debería tener un useState con un estado), y a partir de ese estado mostrar o no el contador ItemCount.
+    Ahí fue que desarrollo: const [cantidadSeleccionada, setCantidadSeleccionada] =useState(0)
+
+    Y luego: 
+        De este modo, estoy guardando en un estdo local de este componente, el nro que me llega desde el contador.
+    (30')

@@ -1,53 +1,39 @@
 import React from 'react'
 
-import {Container, Button, Card} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 
 import { useState } from "react"
 
-const ItemCount = () => {
+const ItemCount = ({initial, stock, onAdd}) => {
 
-  const inicial=1
-  const stock=10
-  const [estado, setEstado] = useState(inicial)
+  let [estado, setEstado] = useState(initial)
 
   const handleSumar = () => {
-    console.log ("Click")
-    if (estado<stock){
-      setEstado(estado + 1)
-    }  
+      if(estado < stock){
+          setEstado(estado + 1)
+      }
   }
 
   const handleRestar = () => {
-    console.log ("Click")
-    if (estado>inicial){
-      setEstado(estado - 1)
-    }    
+      if(estado > initial){
+          setEstado(estado - 1)
+      }
+      
+  }
+  
+  const handleAgregar = () => {
+      //setEstado(0)
+      onAdd(estado)
   }
 
-  const onAdd = () => {
-    if (stock>=estado){
-      console.log ("Se puede despachar la cantidad solicitada, ya que no supera al stock")   
-    }   
-  }
+
   return (
-    <Container as="div" style={{display:'flex flex-wrap'}}>
-      <text>El stock disponible es de {stock} unidades</text>
-
-      <Card style={{display:'flex'}} className="align-content-center text-center"  >
-        <Card.Body>
-          <Card.Title>Vestido Bla</Card.Title>
-          <Card.Text className="d-flex flex-row justify-content-center">   
-          
-            <Button onClick={handleRestar} variant="danger" size="sm" > - </Button>
-            <h3> {estado} </h3>
-            <Button onClick={handleSumar} variant="success" size="sm"> + </Button>
-          
-          </Card.Text>
-          <Button onClick={onAdd} variant="dark">Agregar al carrito</Button>
-        </Card.Body>
-      </Card>
-    </Container>
+      <div>
+          <p>Mi Contador va : {estado}</p>
+          <Button onClick={handleSumar} variant="success" size="sm"> +</Button>
+          <Button onClick={handleAgregar} variant="dark">AGREGAR AL CARRITO</Button>
+          <Button onClick={handleRestar} variant="danger" size="sm" >-</Button>
+      </div>
   )
 }
-
 export default ItemCount
