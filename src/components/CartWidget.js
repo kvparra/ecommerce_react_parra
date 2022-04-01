@@ -1,13 +1,18 @@
 import React from 'react'
-
+import { useContext } from "react"
+import {contexto} from "./CartContext"
 
 const CartWidget = () => {
  
+  const {cantidad} =useContext(contexto)
 
   return (
-    <span className="material-icons" id="cartwidget">
-    shopping_cart
-    </span>
+    <div>
+      <span className="material-icons" id="cartwidget">
+      shopping_cart
+      </span>
+      <span>{cantidad}</span>
+    </div>
 
   )
 

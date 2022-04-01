@@ -1,28 +1,26 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext} from 'react';
 import Rate from 'rc-rate';
 import 'rc-rate/assets/index.css';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
 import ItemCount from './ItemCount';
-import {Button} from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
-import {contexto} from './CartContext'
+import {contexto} from './CartContext';
 
 const ItemDetail = ({item}) => {
   const {addItem} = useContext(contexto)
-
-  const [seleccionado, setSeleccionado] =useState(0)
+  const [clicked, setClicked] =useState(false)
+  const [seleccionado, setSeleccionado] =useState({})
   let navigate = useNavigate();
 
   const onAdd = (cantidadSeleccionada) =>{
-    /* console.log('Añadir al carrito', cantidadSeleccionada) */
-    setSeleccionado(cantidadSeleccionada) //Acá guarda la cantidad en el estado
+    setSeleccionado(cantidadSeleccionada) 
 
-    setTimeout(()=>{
-      navigate('/cart')
-    },3000)
-    
-    
+      setTimeout(()=>{
+        navigate('/cart')
+      },3000)
+       
     addItem (item,cantidadSeleccionada)
+    setClicked(true)
   }
   return (
 
@@ -38,19 +36,9 @@ const ItemDetail = ({item}) => {
           
         </div>
         <p className="descripcion"> {item.description} </p>
-        {/* <Contador stock={5} initial={1} onAdd={onAdd}/> */}
-      
-      {/* Para la OPCIÓN 1: USANDO CONDICIONAL */}
-      {/*   {
-          cantidadSeleccionada===0? <ItemCount stock={5} initial={1} onAdd={onAdd} />: 
-          <p>Tu compra ya fue enviada al carrito <br/> Presiona el botón TERMINAR COMPRA para dirigirte al carrito.</p>
-        } */}
-        {/* PARA LA OPCION 2: USANDO USENAVIGATE */}
-        <ItemCount stock={5} initial={1} onAdd={onAdd} />
-
-        <Link to={`/cart`}>
-          <Button variant="dark">Terminar compra</Button> {/* Puedo usar useNavigate en vez de link, para lo que pide el desafío */}
-        </Link>
+    
+        {clicked ? (<Link to="/cart">Ir al carrito</Link>) : (<ItemCount initial={1} stock={5} onAdd={onAdd} />)}
+        
     </article>
   );
 

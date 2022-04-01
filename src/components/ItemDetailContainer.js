@@ -19,9 +19,10 @@ const ItemDetailContainer = () => {
       return response.json()
     })
     .then((respuesta)=>{
-      /* console.log(respuesta) */
+      
       setItem(respuesta)
     })
+
     .catch(()=>{
       toast.error("Error al cargar el producto")
     })
@@ -34,7 +35,7 @@ const ItemDetailContainer = () => {
     return <h1>Cargando...</h1>
   }else{
     return (
-      <ItemDetail item={item}/>
+      <ItemDetail key={item.id} item={item}/>
     )
   }
   

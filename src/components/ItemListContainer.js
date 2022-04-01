@@ -9,15 +9,11 @@ const ItemListContainer = () => {
   const {idCategoria}= useParams() 
 
   useEffect(()=>{
-    /* toast.info("Se están cargando los productos") */
-    
-    fetch('https://fakestoreapi.com/products') // Esto sería una promesa suelta
-    .then((response) =>{ //Este primer then me da un objeto de tipo response
-      /* console.log(response.json()) */ //Según los pasos, a este objeto le hago el .json (y esto me da un promise en el clg). Y como está dentro del then, lo retorno y pongo un then abajo.
+    fetch('https://fakestoreapi.com/products') 
+    .then((response) =>{ 
       return response.json()
     })
     .then((resultado)=>{
-      /* console.table(resultado) */ //Acá me muestra todos los productos del array
       setItems(resultado)
     })
     .catch(() =>{
@@ -27,28 +23,15 @@ const ItemListContainer = () => {
       setLoading(false)
     })
 
-    /* return()=>{
-      setItems([])
-    } */
-
   },[idCategoria])
-
- /*  return(
-  <div style={{marginTop: '20px'}}>
-    {loading ? <Spinner/> : <ItemList items={items}/> }
-  </div>
-) */
 
   if(loading){
   return <h1>Cargando...</h1>
 } else{
   return <ItemList items={items}/>
   
+}     
 }
-     
-  
-}
-
 export default ItemListContainer
 
 
