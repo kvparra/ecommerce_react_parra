@@ -1,24 +1,28 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import Rate from 'rc-rate';
 import 'rc-rate/assets/index.css';
 import {Link} from "react-router-dom"
 import ItemCount from './ItemCount';
 import {Button} from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
+import {contexto} from './CartContext'
 
 const ItemDetail = ({item}) => {
+  const {addItem} = useContext(contexto)
 
-  const [cantidadSeleccionada, setCantidadSeleccionada] =useState(0)
+  const [seleccionado, setSeleccionado] =useState(0)
   let navigate = useNavigate();
 
   const onAdd = (cantidadSeleccionada) =>{
     /* console.log('Añadir al carrito', cantidadSeleccionada) */
-    setCantidadSeleccionada(cantidadSeleccionada) //Acá guarda la cantidad en el estado
+    setSeleccionado(cantidadSeleccionada) //Acá guarda la cantidad en el estado
 
     setTimeout(()=>{
       navigate('/cart')
     },3000)
     
+    
+    addItem (item,cantidadSeleccionada)
   }
   return (
 

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useContext}  from 'react'
 import CartWidget from "./CartWidget"
 import {Link} from "react-router-dom"
-import Form from "./Form"
+import {contexto} from "./CartContext"
 
 const NavBar = () => {
+    const {calcularCantidad} = useContext(contexto)
+
     return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-light " >
 
@@ -11,8 +13,10 @@ const NavBar = () => {
             <Link to="/category/Meemm" className='nav__link'> cat 2</Link>
             <Link to="/category/Gabtune" className='nav__link'> cat 3</Link>
             <Link to="cart">
+                {/* calcularCantidad()>0 que muestre algo, sino que muestre otr cosa. */}
                 <CartWidget/> 
             </Link>
+            {calcularCantidad()}
             <Link to="/form">
                 Form 
             </Link>
@@ -22,43 +26,3 @@ const NavBar = () => {
   }
   
   export default NavBar
-
- /*  <div className="navbar-items flex-end">
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-        
-                <div id="navbarNavDropdown" className="collapse navbar-collapse ">
-        
-                    <ul className="navbar-nav ">
-                        <li className="nav-item active">
-                            <Link to="inicio" className="nav-link " aria-current="page"> INICIO</Link>
-                        </li>
-            
-            
-                        <li className="nav-item">
-                        <Link className="nav-link" to="Productos">Productos</Link>
-                        </li>
-            
-                        <li className="nav-item">
-                        <Link className="nav-link" to="Sale">Sale!</Link>
-                        </li>
-
-                        <li className="nav-item">
-                        <Link className="nav-link" to="JUANÍ">JUANÍ Giftcards</Link>
-                        </li>
-
-                        <li className="nav-item">
-                        <Link className="nav-link" to="Nosotros">Nosotros</Link>
-                        </li>
-
-                        <li className="nav-item">
-                        <Link className="nav-link" to="medidas">Tabla de medidas</Link>
-                        </li>
-
-                        <li className="nav-item">
-                        <Link className="nav-link" to="Política">Política de devolución</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div> */

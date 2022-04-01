@@ -1,0 +1,77 @@
+CLASE 10: CONTEXT 
+(hasta 14' desafio clase pasada)
+    API DE CONTEXT: Implementación  del patrón de publicación y suscripción de javascript (buscarlo como pub/sub design pattern)-
+        No hay que instalar nada para usarla.
+    REDUX: TAmbién es una implementación del mismo patrón pero muchísimo más complejo
+        Para usarla hay que instalar una librería adicional.
+
+    (23')Para ambos: el patrón de implementación y suscripción, yo voy a tener un lugar de almacenamiento "global" (como una especie de variable 
+    o store). Entonces vamos a crear un lugar de almacenamiento llamado el CONTEXTO y adentro le ponés lo que
+    quieras... Uno o muchos array, un objeto, lo que sea.
+    Es como un estado o el useState, que uno le pone lo que quiere guardar dentro.
+    * La idea es que puedo SUSCRIBIRME a cambios: cualquier componente se puede suscribir hacia el contexto y cdo el contexto cambie, como el componente está suscripto a esos cambios, entonces también el componenete se va a actualizar (en tiempo real)
+    * También desde cualquier componente (no necesariamente de donde me suscribí), puedo publicar cambios. EJ: desde componente 1 te publico un push (necesito que un array vacío tenga un objeto nuevo)
+    El contexto se crea 1 vez en 1 solo lugar. En el lugar donde lo ubiques, de ahí hacia abajo todos los componentes pueden usarlo.
+
+IMPLEMENTACION DE CONTEXTO : 
+1) Crear el contexto con createContext (función que viene de react y que se puede hacer en CUALQUIER ARCHIVO)
+    El lo hizo en App, pero lo más probable es que nunca esté en App y que tenga su propio archivo, para hacer sus propias cosas.
+        const resultado = createContext() --> Puede llevar parámetro dentro del parentesis, pero en este caso no va a servir. Ese valor guardado, sería el valor que quiero guardar dentro del contexto.
+            Pero si yo escribo un valor ahí, quiere decir que lo dejo fijo y no va a poder cambiar, por eso no me sirve.
+        console.log(resultado)
+        const resultado =createContext({
+            carrito:[],
+            cantidad: 0,
+            total: 0
+        }) //Solo lo muestra así dentro del paréntesis por ahora pero no lo vmos a usar así.
+            Porque poner el valor del contexto así, hace que no cambie nunca (siempre tendría un carrito vacío, x ej)
+            Si abro consola, me muestra el objeto donde las únicas cosas interesantes son Provider Y Consumer (que como arrancan en mayúscula son COMPONENTES).
+
+            * Entonces crear el contexto me brinda 3 cosas: 1- el contexto en sí 2 - componentes (como las librerías, q son consumer y provider)
+            //const Provider =contexto.Provider
+            //const Consumer = contexto.Consumer
+            o sino: const {Consumer, Provider} = contexto
+            //<Provider>
+
+    * Contexto --> tipo de dato: objeto
+    Lo que me sirve guardar en este caso es: el ARRAY DE PRODUCTOS y LA CANTIDAD de productos que se guardaron en el carrito. Pero como solo puedo guardar 1 cosa lo que guardo es un objeto con 2 propiedades.
+    (41')
+    PRIMERA OPCIÒN: VOY A ALGÚN LUGAR Y TRAIGO EL VALOR DEL CONTEXTO
+        Antes se hacía con el componente Consumer, que te permitía consumir el contexto. Pero hoy no se usa.
+        Después se inventó un hook useContext (desarrollamos entre App y CartWidget)
+        (53') Explicación de ejemplos de contexto.
+        Después en el Header donde está el dibujito del carrito, hicimos lo mismo pero solo tomamos {cantidad} para que lo muestre en el header
+2) Sacar el Provider de adentro del contexto
+3) Export de contexto y Provider
+
+LEER EL CONTEXTO
+4) Vas al componente donde queres leer algo del contexto
+5) Traes el hook useContext
+6) Traes el objeto contexto
+7) useas el hook como useContext(contexto)
+
+Segunda parte: cómo podemos cambiar el valor de un contexto.
+    Para eso se usa el mismo patrón de diseño que usa el componente BrowseRouter, solo que a ese lo instalé y ahora al contexto lo estoy construyendo a mano.
+    El dinamismo para que una función a veces haga una cosa u otra se lo da props: si una función toma parámetros, puede usarlos para a veces hacer una cosa u otra (a veces le voy a pasar App, a veces Header, o lo que sea que me convenga)
+
+PATRON PROVIDER / CAMBIAR EL CONTEXTO
+8) Crear un componente NUEVO que va a usar el contexto
+9) En el retorno usas el Provider con su prop value (que setea el valor del contexto)
+
+(1h26') Diferencia entre useEffect y useState
+    La información para que varie me conviene tenerla en estados. Tengo que hacer un estdo por cada cosa.
+    Un estado para el carrito, otro para cantidad y otro para total (con useState)
+
+(1h37') Que toda la lógica fuerte esté en CartContext --> agregarProdAlCarrito
+
+(1h55')Explicacion desafio
+
+AFTERCLASS  *******************************************
+
+FUNCIONALIDAD NECESARIA DEL CARRITO (DESAFÍO)
+A) Agregar un objeto al CARRITO
+B) Eliminar un objeto del CARRITO
+C) Vaciar el carrito
+
+D)Obtener cantidad de items en el CARRITO
+E) Calcular precio total de compra

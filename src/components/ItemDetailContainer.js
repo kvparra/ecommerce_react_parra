@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
       return response.json()
     })
     .then((respuesta)=>{
-      console.log(respuesta)
+      /* console.log(respuesta) */
       setItem(respuesta)
     })
     .catch(()=>{

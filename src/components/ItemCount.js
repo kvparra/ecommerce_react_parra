@@ -31,7 +31,7 @@ const ItemCount = ({initial, stock, onAdd}) => {
       <div>
           <p>Mi Contador va : {estado}</p>
           <Button onClick={handleSumar} variant="success" size="sm"> +</Button>
-          <Button onClick={handleAgregar} variant="dark">AGREGAR AL CARRITO</Button>
+          <Button onClick={handleAgregar} variant="dark">CONFIRMAR CANTIDAD</Button>
           <Button onClick={handleRestar} variant="danger" size="sm" >-</Button>
       </div>
   )
