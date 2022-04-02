@@ -11,7 +11,7 @@ const CartWidget = () => {
       <span className="material-icons" id="cartwidget">
       shopping_cart
       </span>
-      <span>{cantidad}</span>
+      <span>{cantidad!=0? cantidad: ""}</span> {/* No apliqué lo de borrar el widget, sino solo el nro */}
     </div>
 
   )
@@ -19,3 +19,4 @@ const CartWidget = () => {
 }
 
 export default CartWidget
+

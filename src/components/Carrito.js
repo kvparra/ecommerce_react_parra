@@ -27,10 +27,11 @@ const Carrito = ({item}) => {
               <Button onClick={()=> removeItem(item)} variant="dark">BORRAR PRODUCTO</Button>
             </div>
           ))}
-          {!!total && <h3>TOTAL: $ {total}</h3>}
+          {!!total && <h3>TOTAL: $ {Intl.NumberFormat('es-AR').format(total)}</h3>}
           <Button onClick={clear} variant="dark">BORRAR TODO</Button>
         </>
       }
+      
     </div>
   )
 }
