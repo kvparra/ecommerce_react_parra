@@ -1,0 +1,69 @@
+CLASE 11: RENDERING
+No se aplica al proyecto... Pero se puede usar si queremos
+
+Trata de cuántas veces un componente se renderiza, por qué, cómo solucionarlo.
+
+Para el desafío: seguir manejando el contexto, ni siquiera crear nuevos componentes sino manejarnos con los que ya tenemos (CartWidget y Carrito).
+
+    * Operar ternario (render condicional)
+        Es como hicimos con el loading en ItemListContainer: 
+        if(loading){
+            return <h1>Cargando...</h1> blabla
+        }
+        (5') O mejorado sería:
+        return (
+            <>
+                {loading? <h1>Cargando productos...</h1> : <ItemList items={items}/>}
+            </>
+            )
+
+        (52') Si fueran 2 textos, para no crear 2 etiquetas puedo hacer el if dentro de la etiqueta (en este caso p):
+            return (
+                <>
+                    <p> {loading? "Cargando productos...": "Terminó la carga"} </p>
+                </>
+                )
+        (55')Si lo que quiero cambiar es que cambie de color el mismo texto según si está cargando o no, pongo la etiqueta dentro de la clase:
+            return (
+                <>
+                    <p className={loading? "red" : "blue"} >  "TEXTO"</p>
+                </>
+                )
+
+    * (19') : habla del boton BORRAR del carrito (borrar producto individual)
+        En el desafío pide que borrar se haga en el archivod de contexto (sería como el container)
+        Porque ahí está el estado y tiene que decir qué hacer con ese carrito
+        Si pusiera borrar en otro lado, por ejemplo en Carrito.js, no sería reutilizable en otro lado ese botón, entonces no me serviría. (carrito.js sería presentacional)
+        **** Los componentes simplemente le dan ordenes al context mediante las funciones: Borra esto, mostrame el carrito, vacía el carrito, etc. pero no se ocupan de "cómo" hacer eso, esa es la responsabilidad del CartContext
+
+    * FALTA EN DESAFIO NO MOSTRAR CARRITO O NO MOSTRAR NRO DE CARRITO (36' lo explica con if)
+    LLEGUÈ 42' ******************************
+
+    (1h12') EMPEZÓ CON LO DE RENDERING
+    Dentro del Main, creó la Route TestContainer path="/test"
+    (1h33')Surge el problema de que veo que si ejecuto el container con el boton agregar, también se renderiza cada vez el ItemList
+    Y yo no quiero que eso pase.
+    Acá es donde voy a empezar a usar la ventana Profiler, que es la otra de la consola que me venía con components.
+        Ahí, con el círculo puedo empezar a grabar y medir... Entonces encuentro los componentes conflictivos (en cuanto a duplicados y tiempos)
+        Te dice porqué se renderizó (es mucho mejor que hacer consolelogs!!!)
+    Para evitar que vuelva a renderizar tengo 3 opciones: 2 hooks y una funcion:
+    ***useMemo: memoriza una variable interna de un componente si no es función. En TestContainer tengo 6 variables (nombre, setNombre, usuario, setUsuario, handleChange y handleClick):
+        para las 2 handle no podría usar useMemo porque son funciones. (igualmente estas no son las que me hacen re-renderizar porque no se las pasé)
+    ***useCallback: memoriza una función interna de un componente.
+    ***memo (es un HoC, antiguo, sirve pero se usa poco): memoriza un componente. Eso implica que el componente queda fijo. Esta es la que me sirve, lo probamos en TestList
+        Lo importo como {memo} y luego lo exporto como memo en la línea final
+        Listo! Si ahora lo vuelvo a probar, solo me renderiza container y lista la primera vez con la carga de la pág, y luego por cada letra solo me renderiza container!
+
+   Ahora surge el problema de que si guardo el primer usuario, supongamos "Kari", renderiza OK. Pero al guardar un segundo usuario, supongamos "Juani", me renderiza 2 veces extra (x kari y x juani) 
+        Otra vez no puede usarse los hooks porque no cambian las props... Vuelvo a usar el método del memo.
+
+FUNCION BORRAR: La creo en TestContainerpero la ejecuto en TestItem.
+    En este caso lo pasamos x props, pero x contexto sería más fácil
+    Se lo paso x prop a ItemList (aunque no lo usa) y luego de List a TestItem.
+    En este caso, me ejecuta la funcion borrar por cada render, entonces en cierta forma se "rompe" lo que hice antes.Ahora sí se trata de una función, entonces puedo ejecutar el hook useCallback
+
+    
+
+
+
+

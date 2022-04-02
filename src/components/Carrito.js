@@ -13,7 +13,7 @@ const Carrito = ({item}) => {
       <h2>Carrito</h2>
 
       
-      {carrito.length === 0 ?
+      {carrito.length === 0 ? //significa que no hay items en el carrito
         <div>
           <p className="text">No hay nada en tu carrito</p>
           <Link to="/">Ver productos</Link>
