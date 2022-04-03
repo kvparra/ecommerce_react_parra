@@ -1,0 +1,71 @@
+CLASE 12: FIREBASE I
+
+(2-6' ) Explica funcionamiento de copilot:
+    Alt ?, Alt ¿ , alterna sugerencias, Alt enter te muestra el menú de sugerencias que vos podes completar si queres
+
+firebase.google.com
+    Es una plataforma que tiene google, que cdo entrás a consola podés usar varios de los servicios que te da.
+    Que te ofrece muchas opciones de back end hosting base de datos etc
+    Es como unna db de juguete
+    Ir al botón IR A LA CONSOLA
+    El listado de la izquierda donde esta BUILD son los servicios que podemos habilitar
+    * AUTENTICCION: Ya te trae hecho el login, signup, recuperar pass, etc
+    * Go to doc: tiene toda la documentación
+    * (30') firestore db: es el nombre de l base de datos q vamos a usar. Esta q es mas nuev a te da como funciones preconstruidas (como traeme tal cosa de la db). No hago el pedido yo con ajax.
+    * realtime db: es en tiempo real igual q la firestore, pero es la vieja. Esta funcion más como un apirest
+    * storge: es analogo a nustro public. Es pra guardar imgs, tipografias, css, etc.
+    * Puedo guardar la pag en un hosting q t dan ellos
+    * functiom: si no se hacer bckend con toda la arq del servidor, pero tengo esta funcionlidad q me permite ssubir funciones sueltas, a un servidor ya construido x firebase
+        Esta de moda
+
+firestore db ************************
+1. Creat db
+2. start in test mode (pra production necesito un par de permisos q tvia no tengo configurdos)
+3. Elegi la locatiom q muestra  default
+4. habilitar
+5. start collection (nonmbre puede ser productos o items, en estev caso): copio todos los del fake api x cada pdto. Agrego campo id donde pongo el valor del array de la fakeapi
+    (1h11') Donde dice Document id: poner AUTOID--> SE VA  GENERAR un nro random y asi se hace en las bd reales
+6. Ahora para que React pueda acceder a FIREBASE le tengo que dar permisos. 
+    a. Ir a rueda dentada
+    b. Project settings
+    c. Seccion que dice "Your apps" y ahí elegir web (</>)
+    d. Elegir cualquier nombre para app
+    e. Te deja tildar para hostearla ahí. Pero el profe dice q no la usa, que vamos a usar netlify.
+    f: Click a registrar app
+    Luego falta conectarlo con vsc.
+    g. Él creó un archivo firebase.js y copio y pego lo que dice en el paso 2, luego de registrar app
+    h. Luego instalo por consola: npm start firebase
+Para acceder a la doc correcta de esta versión: go to docs > docs> reference > js versión 9> firestore> overwiew  (panel izquierdo)
+    Ahí me aparecen todas las funciones que voy a poder importar desde firebase.
+    i. agrego esta linea de import: import {getFirestore} from "firebase/firestore"
+    j. Y luego: export const db = getFirestore(app) 
+        Con esa db puedo acceder a todas las colecciones que haya creado
+        Acá terminé con este archivo que ya no voy a tocar. Ahora voy a todos los archivos que van a hacer consulta a esa db.
+        (esos son x ej: ItemDetailContainer - ItemListContainer - Carrito (que tiene boton de finalizar compra, y esa compra se tiene que guardar en firebase))
+        Hay componentes que leen cosas y otros que guardan cosas en firebase
+            ABML: ALTA BAJA MODIFICACION listado
+            CRUD: CREATE READ UPDATE DELETE
+    Las funciones que más vamos a usar del firestore son: getDocs(para traer muchos documentos)  getDoc(para traer ed a 1 doc)  
+        collection(x ej para trer docs de 1 sola collection) 
+         updateDoc (x ej para actualizar l prop stock si alguien compro algo)
+         addDoc (ej para registrar una venta nueva) 
+         query(es como filtro: quiero traer solo los docs cuya categoria sea x)
+         where
+
+ItemListContainer
+Voy a traer todos los productos que tengo (que hasta ahora cargué 1 solo)
+Ya no va el fetch del ItemListContainer
+1. Importo{db} from firebase
+Hacer un clg de db --> si esto tira un objeto y no da error, está todo ok
+2. Establecer de cual collection quiero consultar
+    const itemCollection = collection(db,"app_ecommerce") - - db es el nombre de la base de datos q puse yo y app_ecommerce el nombre que yo le puse a la coleccion
+    console.log(itemCollection)
+    const consulta = getDocs(itemCollection)
+    console.log(consulta) --> Esa consulta en consola me da que es una promise. Entonces sigo con then!!
+
+    Uso el then, y lo que me da como resuñltado la consulta y el primer resultado es una representacion de lo que tengo en la db.
+        Entonces de ahio me interesa el array que está en docs. Por eso uso .docs y .data (que este ultimo es analogo al .json que usaba en fetch)
+        . data es una funcion que le extrae la data al documento
+
+
+    
