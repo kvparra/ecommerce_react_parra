@@ -6,9 +6,9 @@ const NavBar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark navbar-light " >
 
-                <Link to="/category/Katz" className='nav__link'> cat 1</Link>
-                <Link to="/category/Meemm" className='nav__link'> cat 2</Link>
-                <Link to="/category/Gabtune" className='nav__link'> cat 3</Link>
+                <Link to="/category/clothing" className='nav__link'> CLOTHING </Link>
+                <Link to="/category/electronics" className='nav__link'> ELECTRONICS </Link>
+                <Link to="/category/jewelery" className='nav__link'> JEWELERY </Link>
                 <Link to="cart">
                     <CartWidget/> 
                 </Link>

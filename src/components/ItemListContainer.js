@@ -3,7 +3,7 @@ import ItemList from './ItemList'
 import {toast } from 'react-toastify';
 import {useParams} from "react-router-dom"
 import {db} from "../firebase"
-import {collection, getDocs} from "firebase/firestore"
+import {collection, getDocs, query, where} from "firebase/firestore"
 
 console.log(db)
 
@@ -14,41 +14,26 @@ const ItemListContainer = () => {
   const {idCategoria}= useParams() 
 
   useEffect(()=>{
-    const itemCollection = collection(db,"app_ecommerce")
-    const consulta = getDocs(itemCollection)
-    /* console.log(consulta) */
-    consulta
-      .then((resultado)=>{
-        /* console.log(resultado)
-        resultado.docs.forEach((doc)=>{
-          console.log(doc.data()) //Esta es la primer consulta a la db
-          console.log(doc.id) //Me muestra el id autogenerado */
-          const array_rdo = resultado.docs.map((doc)=>{
-            return doc.data()
-          })
-          setItems(array_rdo) // Si voy a Components de consola lo veo como state
-          setLoading(false)
-        })
-      
-      .catch (()=>{
-        toast.error("Error al cargar los productos")
-      })
+    
+    if(!idCategoria){
+      const itemCollection = collection(db,"app_ecommerce")
+      const consulta = getDocs(itemCollection)
 
-    /* console.log(itemCollection) */
-    /* fetch('https://fakestoreapi.com/products') 
-    .then((response) =>{ 
-      return response.json()
-    })
-    .then((resultado)=>{
-      setItems(resultado)
-    })
-    .catch(() =>{
-      toast.error("Error al cargar los productos")
-    })
-    .finally(() =>{
-      setLoading(false)
-    }) */
-
+      consulta
+      .then(resultado=>setItems(resultado.docs.map(doc=>doc.data())))
+      .catch (()=>toast.error("Error al cargar los productos"))
+      .finally (()=> setLoading(false))
+    }else{
+      const itemCollection = collection(db,"app_ecommerce")
+      const filter = query(itemCollection, where("category", "==",idCategoria))
+      const consulta = getDocs(filter) 
+      /* console.log(consulta) */
+      consulta
+      .then(resultado=>setItems(resultado.docs.map(doc=>doc.data())))
+      .catch (()=>toast.error("Error al cargar los productos"))
+      .finally (()=> setLoading(false))
+    }
+    
   },[idCategoria])
 
     return (

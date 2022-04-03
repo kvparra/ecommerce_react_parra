@@ -1,0 +1,13 @@
+CLASE 13: FIREBASE II ************
+
+(1-35') Repaso clase pasada
+
+CATEGORÍAS
+1. Le cambiamos los paths en NavBar
+2. (46') Dice como hacer las categorías, que es rubrica del final
+3. Importo query: ahí hay varios filtros para usar en la doc (ordenar, x ej: x precio, por nombre, etc). El que vmos a usar es el filtro tipo WHERE
+    Elijo WHERE porque quiero filtrar los productos cuya categoría sea XXX
+4. (55')Importo WHERE: lleva 3 parámetros. El primero es el nombre del campo por el cual quiero filtrar (en mi caso category)
+    2do parametro es string y es la comparacion (=>< etc)
+    3ro idCategoria
+5. Le paso el filtro a consulta
