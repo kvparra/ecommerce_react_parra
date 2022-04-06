@@ -11,3 +11,22 @@ CATEGORÍAS
     2do parametro es string y es la comparacion (=>< etc)
     3ro idCategoria
 5. Le paso el filtro a consulta
+
+(1h2') AHORA PARA ITEMDETAILCONTAINER Y CARRITO:
+1. COPIO LA LINEA DEL IMPORT DB
+2. Saco el fetch del ITEMDETAILCONTAINER
+3. Yo quiero traer un solo producto, entonces tengo 2 opciones:
+    a. getDoc (sin s final): me trae la referencia de 1 solo documento
+        Luego tengo que traer la funcion "doc"
+        getDoc solo funciona con el id autogenerado!
+            const pedido = getDoc(doc(itemCollection,"0YazuTvH12mpjR8LJB5s"))
+            pedido.then((res)=>console.log(res.data()))
+    b. Con query y getDocs:
+        const filter = query(itemCollection, where("id", "==",idProducto))
+        const consulta = getDocs(filter) 
+(1h25') Explico el setCart pero con push
+(1h28') Explicó cuenta de cantidad para el cart
+(1h37') Para entrega final sacar el hardcodeo de buyer y consumirlo a travès de un formulario.
+    Ideal: hacer formulario en otro componente y ponerlo en carrito 
+    Puede ser que si hay items en el carrito que me muestre el formulario. U otr es que cuando termino compra, aprieto botón y me lleva a otra url donde está el formulario (/checkout)
+(1h46') A el se lo agregó como coleccion nueva en el firebase
