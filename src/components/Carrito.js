@@ -9,9 +9,6 @@ import { toast } from 'react-toastify'
 
 const Carrito = () => {
   const {carrito, total, removeItem, clear} = useContext (contexto)
-
-  /* console.log(carrito) */
-
   const terminarCompra =() =>{
     const order = {
       buyer: {
@@ -28,19 +25,20 @@ const Carrito = () => {
 
     pedido
     .then(res=>{
-      console.log(res)
       toast.success("Tu compra se ha finalizado exitosamente")
     })
     .catch(()=>{
         toast.error("Ha ocurrido un error")
     })
+
+    clear()
   }
   return (
     <div>
       <h2>Carrito</h2>
 
       
-      {carrito.length === 0 ? //significa que no hay items en el carrito
+      {carrito.length === 0 ?
         <div>
           <p className="text">No hay nada en tu carrito</p>
           <Link to="/">Ver productos</Link>

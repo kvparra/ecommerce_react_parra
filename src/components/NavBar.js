@@ -4,18 +4,18 @@ import {Link} from "react-router-dom"
 
 const NavBar = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark navbar-light " >
+        <nav className="navbar navbar-expand-lg navbar-dark navbar-light">
 
-                <Link to="/category/clothing" className='nav__link'> CLOTHING </Link>
-                <Link to="/category/electronics" className='nav__link'> ELECTRONICS </Link>
-                <Link to="/category/jewelery" className='nav__link'> JEWELERY </Link>
+                <Link to="/">
+                    <h1 className='header__title'> JUANÍ<span>TICA</span></h1>
+                </Link>
+                <Link to="/category/abrigo" className='nav__link'> ABRIGOS </Link>
+                <Link to="/category/pantalones" className='nav__link'> PANTALONES </Link>
+                <Link to="/category/remeras" className='nav__link'> REMERAS </Link>
                 <Link to="cart">
                     <CartWidget/> 
                 </Link>
-                
-                <Link to="/form">
-                    Form 
-                </Link>
+
         </nav>
     
     )

@@ -1,0 +1,41 @@
+(55') aprox explica lo del npm build para subir el archivo luego a netlify o vercel y deployar
+
+(1h06') README: archivo con toda la documentación del proyecto
+se escribe en un formato llamado markdown 
+En vsc puedo bajar una app "markdown previewer" 
+    # titulo h1
+    ## titulo h2 y así hasta el h6
+
+    PARTES SI O SI:
+    * Descrición del proyecto: contsr de q se trata
+    * Uso / instalación. Parecido a lo q puso el:
+        git clone http://github.com/micuenta/mirepo.github
+        cd mi response
+        npm installed
+        npm start
+
+        Si uso el build, acá también podría poner una sección de demo donde muestro (acá podés ver la app en funcionamiento + link al deploy de netlify)
+
+    * Tecnologías usadas (en qué versión, para q las usé): 
+        (esto tiene q coincidir con lo que está instalado en el package.json y con lo que usé en el proyecto: no pueden haber librerías instaladas q dsp no usé)
+        DESINSTALAR TODO LO Q NO USÉ!!!! consola --> npm uninstall nombre_del_paquete (tal cual figura en el package.json)
+        1. React 17+
+        2. React-Router-DOM 6+
+        3. Versión de bootstrap / toastify o lo q sea q haya usado 
+        4. Descripción personal: soy pepito, me dedico a X e hice este proyecto para bla bla 
+            + una barra de navegación a nuestras redes
+    1. item num 1
+    2. item num 2
+
+    [link q va a google] (https://www.google.com)
+
+
+ENTREGA FINAL ENTONCES TIENE: 
+    * Link al repo
+    * Readme
+    * (1h21) Video / gif del proceso de compra  (grabador de windows: tecla de windows +G)
+        * El carrito se tiene q vaciar cdo pasa bien la compra.
+
+    * Sacar del index todos los comentarios
+    * Se puede agregar el gif directamente al readme y q aparezca como imagen (o sino mandar el enlace del drive, o adjuntar el archivo)
+    No hace falta hacer el gif si entregué el deploy

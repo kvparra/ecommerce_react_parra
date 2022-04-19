@@ -5,8 +5,6 @@ import {useParams} from "react-router-dom"
 import {db} from "../firebase"
 import {collection, getDocs, query, where} from "firebase/firestore"
 
-console.log(db)
-
 const ItemListContainer = () => {
 
   const[loading, setLoading]= useState(true) 
@@ -27,7 +25,6 @@ const ItemListContainer = () => {
       const itemCollection = collection(db,"app_ecommerce")
       const filter = query(itemCollection, where("category", "==",idCategoria))
       const consulta = getDocs(filter) 
-      /* console.log(consulta) */
       consulta
       .then(resultado=>setItems(resultado.docs.map(doc=>doc.data())))
       .catch (()=>toast.error("Error al cargar los productos"))
@@ -44,3 +41,4 @@ const ItemListContainer = () => {
    
 }
 export default ItemListContainer
+
