@@ -2,7 +2,7 @@
   
   <h1>Proyecto JUANÍTICA</h1>
   <p>
-    App web de e-commerce realizado durante el cursado de React JS.
+    App web de e-commerce realizado durante el cursado de React JS en Coderhouse.
   </p>
 <!-- Badges -->
 <p>
@@ -16,7 +16,7 @@
   
 </p>
 <h4>
-    <a href="XXXXX">Ver Demo</a>
+    <a href="https://i.ibb.co/f03TN7c/JUANITICA.gif">Ver Demo</a>
   </h4>
 </div>
 
@@ -38,17 +38,28 @@
 ## Acerca del proyecto
 
 <!-- Screenshots -->
+<div align="center"> 
+  <img src="./src/JUANITICA.gif" alt="Demo gif" />
+</div>
 
 ### GIF del proyecto
 
-<div align="center"> 
-  <img src="./src/assets/demo.gif" alt="Demo gif" />
-</div>
+
 
 <!-- Tech -->
 
 ## Tecnologías y librerías usadas
+**`react-hot-toast @2.2.0`**
+* Toasts para indicar resultados de navegación.
 
+**`sass @1.49.9`**
+* Agilización de la implementación de estilos propios.
+
+**`firebase @9.6.3`**
+* Implementación DB no relacional para suministrar contenido al sitio.
+
+**`react-router-dom @6.2.2`**
+* Implementación rutas para navegación entre componentes.
 
 
 <!-- Getting Started -->
@@ -70,7 +81,7 @@ Clonar el proyecto:
 
 ### `INSTALACIÓN`
 
-`$ git clone https://github.com/kvparra/ecommerce_react_parra/tree/master.git`
+`$ git clone https://github.com/kvparra/ecommerce_react_parra.git`
 
 `$ cd proyecto_ecomm`
 
