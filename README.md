@@ -16,7 +16,7 @@
   
 </p>
 <h4>
-    <a href="https://i.ibb.co/f03TN7c/JUANITICA.gif">La app puede visualizarse clickeando aquí</a>
+    <a href="https://ecommerce-react-parra.vercel.app/">La app puede visualizarse clickeando aquí</a>
   </h4>
 </div>
 
