@@ -16,23 +16,12 @@
   
 </p>
 <h4>
-    <a href="https://i.ibb.co/f03TN7c/JUANITICA.gif">Ver Demo</a>
+    <a href="https://i.ibb.co/f03TN7c/JUANITICA.gif">La app puede visualizarse clickeando aquí</a>
   </h4>
 </div>
 
 <br />
 
-<!-- Table of Contents -->
-
-# :notebook_with_decorative_cover: Table of Contents
-
-- [:notebook_with_decorative_cover: Table of Contents](#notebook_with_decorative_cover-table-of-contents)
-  - [:star2: Acerca del proyecto](#star2-acerca-del-proyecto)
-    - [:camera: Screenshots](#camera-screenshots)
-  - [:space_invader: Tecnologías usadas](#space_invader-tecnologías-usadas)
-  - [Comenzando con el proyecto.](#comenzando-con-el-proyecto)
-    - [Prerequisitos](#prerequisitos)
-    - [:running: Correr el proyecto localmente](#running-correr-el-proyecto-localmente)
 <!-- About the Project -->
 
 ## Acerca del proyecto
@@ -49,18 +38,29 @@
 <!-- Tech -->
 
 ## Tecnologías y librerías usadas
-**`react-hot-toast @2.2.0`**
-* Toasts para indicar resultados de navegación.
+**`bootstrap @5.1.3`** / **`react-bootstrap @2.2.0`**
+* Framework CSS para estandarizar estilos
 
-**`sass @1.49.9`**
+**`firebase @9.6.10`**
+* Implementación DB no relacional para suministrar contenido al sitio.
+
+**`node-sass @7.0.1`**
 * Agilización de la implementación de estilos propios.
 
-**`firebase @9.6.3`**
-* Implementación DB no relacional para suministrar contenido al sitio.
+**`rc-rate @2.9.1`**
+* Efectua valoración de productos sobre un total de 5 estrellas.
+
+**`react-dom @17.0.2`**
+* Para usar métodos específicos del DOM.
 
 **`react-router-dom @6.2.2`**
 * Implementación rutas para navegación entre componentes.
 
+**`react-toastify @8.2.0`**
+* Toasts para indicar resultados de interacción con la navegación del usuario.
+
+**`web-vitals @2.1.4`**
+* Medición de rendimiento.
 
 <!-- Getting Started -->
 
