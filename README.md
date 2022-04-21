@@ -16,7 +16,7 @@
   
 </p>
 <h4>
-    <a href="https://ecommerce-react-parra.vercel.app/">La app puede visualizarse clickeando aquí</a>
+    <a href="https://ecommerce-react-parra-l36j5pszj-kvparra.vercel.app/">La app puede visualizarse clickeando aquí</a>
   </h4>
 </div>
 
