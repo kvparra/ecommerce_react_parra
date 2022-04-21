@@ -1,14 +1,17 @@
 import React from 'react'
 import {useContext} from 'react'
 import {contexto} from "./CartContext"
-import { Link } from "react-router-dom"
+import { Link, useNavigate  } from "react-router-dom"
 import {Button} from 'react-bootstrap'
 import {db} from "../firebase"
 import {collection, serverTimestamp, addDoc} from "firebase/firestore"
 import { toast } from 'react-toastify'
 
 const Carrito = () => {
-  const {carrito, total, removeItem, clear} = useContext (contexto)
+  const newId = Math.round(Math.random()*999999)
+  
+  const navigate = useNavigate()
+  const {carrito, total, removeItem, clear, saveOrder} = useContext (contexto)
   const terminarCompra =() =>{
     const order = {
       buyer: {
@@ -18,20 +21,25 @@ const Carrito = () => {
       },
       items:carrito,
       date: serverTimestamp(),
-      total: total
-    }
+      total: total,
+      id: newId
+        }
     const ordersCollection = collection(db,"orders")
-    const pedido = addDoc(ordersCollection,order)
+    const newOrder = addDoc(ordersCollection,order)
+    
 
-    pedido
+    newOrder
     .then(res=>{
       toast.success("Tu compra se ha finalizado exitosamente")
+      saveOrder(newId)
+      clear()
+      navigate('../Checkout')
     })
     .catch(()=>{
         toast.error("Ha ocurrido un error")
     })
 
-    clear()
+    /* clear() */
   }
   return (
     <div>

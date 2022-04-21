@@ -28,7 +28,7 @@
 
 <!-- Screenshots -->
 <div align="center"> 
-  <img src="./src/JUANITICA.gif" alt="Demo gif" />
+  <img src="./src/juanitica2.gif" alt="Demo gif" />
 </div>
 
 ### GIF del proyecto

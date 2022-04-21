@@ -8,6 +8,7 @@ const CartContext = ({children})=>{
     const [carrito, setCarrito] = useState ([]) 
     const cantidad = carrito.reduce ((cantAnterior, productoActual)=> cantAnterior + productoActual.cantidad,0)
     const total= carrito.reduce((totalAnterior, productoActual) =>totalAnterior + (productoActual.price * productoActual.cantidad),0)
+    const [numOrder, setNumOrder] =useState (0)
 
     const isInCart = (id) =>{
       return carrito.some((producto)=> producto.id === id)
@@ -33,13 +34,25 @@ const CartContext = ({children})=>{
     const clear = () =>{
       setCarrito([])
     } 
+    
+    const saveOrder=(newOrder) =>{
+        setNumOrder(newOrder)
+    }
+
+    const showNumOrder=() =>{
+      return numOrder
+    }
+
     const valorDelContexto = {
         carrito: carrito,
         cantidad: cantidad,
         total: total,
         addItem:addItem,
         removeItem:removeItem,
-        clear:clear
+        clear:clear,
+        saveOrder:saveOrder,
+        showNumOrder:showNumOrder,
+        numOrder:numOrder
     }
     return (
         <Provider value={valorDelContexto}>
